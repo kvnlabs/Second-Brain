@@ -1,25 +1,26 @@
 ---
-title: "Blog Using Obsidian"
+title: Blog Using Obsidian
 date: 2024-11-28T11:30:03+00:00
-weight: 2
-tags: ["new","tutorial"]
-author: ["Me"]
+weight: 1
+description: 
+tags:
+  - new
+  - tutorial
+author:
+  - Me
 showToc: false
 draft: false
 disableHLJS: true
-cover:
-    image: "https://miro.medium.com/v2/resize:fit:1400/1*TnvYbAy2WLdZ8uzdzcZFtQ.jpeg" # image path/url
-    alt: "new"
-    relative: true
-# TocOpen: true
-# hidemeta: true
-# disableShare: false
-# hideSummary: true
-# searchHidden: true
-# ShowPostNavLinks: false
-# editPost:
-#     URL: "https://github.com/<path_to_repo>/content"
-#     Text: "Suggest Changes" # edit text
+cover: 
+image: 
+alt: new
+relative: true
+TocOpen: true
+hidemeta: true
+disableShare: true
+hideSummary: false
+searchHidden: false
+ShowPostNavLinks: true
 ---
 
 I'm here trying to create my own blog using obsidian here and this is my 1st day in this Software.
