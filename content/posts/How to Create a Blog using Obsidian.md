@@ -6,15 +6,10 @@ tags:
 author: Me
 draft: false
 description: Nothing Much
-disableHLJS: true
+canonicalURL: "https://canonical.url/to/page"
+disableHLJS: false
 disableShare: true
 searchHidden: false
-cover: 
-image: 
-alt: <alt text>
-caption: <text>
-relative: true
-hidden: false
 ---
 
 I'm here trying to create my own blog using obsidian here and this is my 1st day in this Software.
