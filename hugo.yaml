@@ -1,4 +1,4 @@
-baseURL: "https://secondbrain-3850347cad07.herokuapp.com/"
+baseURL: "/"
 title: SecondBrain
 copyright: "© [Kavin](https://kavinthangavel.tech)"
 paginate: 5
