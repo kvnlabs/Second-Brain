@@ -1,6 +1,6 @@
 ---
 title: Create a Blog Using Obsidian
-date: 2024-11-30T11:30:03+00:00
+date: 2024-11-29T11:30:03+00:00
 tags:
   - first
 author: Me
