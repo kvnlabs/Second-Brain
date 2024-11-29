@@ -65,7 +65,7 @@ jobs:
           ls -l ./public  # Check if the public directory has files
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: hugo-site-public
           path: ./public
