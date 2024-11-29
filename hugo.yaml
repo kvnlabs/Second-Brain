@@ -4,13 +4,11 @@ copyright: "© [Kavin](https://kavinthangavel.tech)"
 paginate: 5
 theme: PaperMod
 
+enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-
-# googleAnalytics: UA-123-45
-
 minify:
   disableXML: true
   minifyOutput: true
@@ -22,17 +20,15 @@ outputs:
     - JSON
 
 params:
-  # env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: SecondBrain
-  description: "New Site"
-  keywords: [Blog, Portfolio]
-  author: Me
-  # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
+  env: production # Enable Google Analytics, OpenGraph, Twitter cards, and schema.
+  description: "Welcome to SecondBrain: A place for knowledge and creativity."
+  keywords: [Blog, Portfolio, Knowledgebase, Inspiration]
+  author: Kavin Thangavel
+  images: ["https://kavinthangavel.tech/images/og-image.png"]
   DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
+  defaultTheme: auto # Options: dark, light
   disableThemeToggle: false
-
+  hideFooter: true
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
@@ -49,91 +45,51 @@ params:
   showtoc: false
   tocopen: false
 
-  assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
-
-  label:
-    text: "Home"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
-
-  # profile-mode
   profileMode:
-    enabled: true # needs to be explicitly set
+    enabled: true # Needs to be explicitly set
     title: SecondBrain
-    subtitle: "This is subtitle"
-    # imageUrl: "<img location>"
+    subtitle: "my personal knowledge repository"
     imageWidth: 120
     imageHeight: 120
-    imageTitle: my image
+    imageTitle: Profile Image
     buttons:
       - name: Posts
         url: pages
       - name: Tags
         url: tags
 
-  # home-info mode
   homeInfoParams:
-    enabled: false # needs to be explicitly set
-    Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog
+    enabled: false # Needs to be explicitly set
+    Title: "Welcome to SecondBrain \U0001F44B"
+    Content: "Dive into a repository of curated knowledge and insights."
 
   socialIcons:
-    - name: x
-      url: "https://x.com/"
     - name: github
-      url: "https://github.com/"
-
-#   analytics:
-#     google:
-#       SiteVerificationTag: "XYZabc"
-#     bing:
-#       SiteVerificationTag: "XYZabc"
-#     yandex:
-#       SiteVerificationTag: "XYZabc"
-
-  cover:
-    hidden: true # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
+      url: "https://github.com/kavinthangavel"
+    - name: linkedin
+      url: "https://linkedin.com/in/kavinthangavel"
+    - name: instagram
+      url: "https://instagram.com/kavin.tech"
+    - name: x
+      url: "https://x.com/kavinthangavel"
 
   editPost:
-    URL: "https://github.com/<path_to_repo>/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+    URL: "https://github.com/kavinthangavel/secondbrain/content"
+    Text: "Suggest Changes" # Edit text
+    appendFilePath: true # Append file path to Edit link
 
-  # for search
-  # https://fusejs.io/api/options.html
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
-    keys: ["title", "permalink", "summary", "content"]
-menu:
-  main:
-    - identifier: archive
-      name: Archive
-      url: /archives/
-      weight: 10
-    - name: Search
-      url: /search/
-      weight: 10
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 20
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-pygmentsUseClasses: true
+  assets:
+    favicon: "https://kavinthangavel.tech/images/favicon.ico"
+    favicon16x16: "https://kavinthangavel.tech/images/favicon-16x16.png"
+    favicon32x32: "https://kavinthangavel.tech/images/favicon-32x32.png"
+    apple_touch_icon: "https://kavinthangavel.tech/images/apple-touch-icon.png"
+    safari_pinned_tab: "https://kavinthangavel.tech/images/safari-pinned-tab.svg"
+
+  cover:
+    hidden: true # Hide everywhere but not in structured data
+    hiddenInList: true # Hide on list pages and home
+    hiddenInSingle: true # Hide on single page
+
 markup:
   goldmark:
     renderer:
@@ -143,29 +99,24 @@ markup:
     noClasses: false
     codeFences: true
     guessSyntax: true
-    # anchorLineNos: true
-    # lineNos: true
-
-# privacy:
-#   vimeo:
-#     disabled: false
-#     simple: true
-
-#   twitter:
-#     disabled: false
-#     enableDNT: true
-#     simple: true
-
-#   instagram:
-#     disabled: false
-#     simple: true
-
-#   youtube:
-#     disabled: false
-#     privacyEnhanced: true
 
 services:
   instagram:
     disableInlineCSS: true
   twitter:
     disableInlineCSS: true
+
+menu:
+  main:
+    - identifier: archive
+      name: Archive
+      url: /archives/
+      weight: 10
+    - name: Search
+      url: /search/
+      weight: 10
+
+
+# analytics:
+#   googleAnalytics: "UA-XXXXX-Y"
+#   plausibleAnalytics: "https://plausible.io/secondbrain.example.com"

@@ -6,8 +6,8 @@
     <description>Recent content on SecondBrain</description>
     <image>
       <title>SecondBrain</title>
-      <url>//localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>//localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://kavinthangavel.tech/images/og-image.png</url>
+      <link>https://kavinthangavel.tech/images/og-image.png</link>
     </image>
     <generator>Hugo -- 0.139.0</generator>
     <language>en</language>
@@ -19,6 +19,13 @@
       <link>//localhost:1313/pages/hi/</link>
       <pubDate>Thu, 28 Nov 2024 11:30:03 +0000</pubDate>
       <guid>//localhost:1313/pages/hi/</guid>
+      <description>Desc Text.</description>
+    </item>
+    <item>
+      <title>Test Post 2</title>
+      <link>//localhost:1313/pages/testing/</link>
+      <pubDate>Thu, 28 Nov 2024 11:30:03 +0000</pubDate>
+      <guid>//localhost:1313/pages/testing/</guid>
       <description>Desc Text.</description>
     </item>
   </channel>
