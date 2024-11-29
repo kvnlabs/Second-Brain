@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pages on SecondBrain</title>
+    <link>//localhost:1313/pages/</link>
+    <description>Recent content in Pages on SecondBrain</description>
+    <image>
+      <title>SecondBrain</title>
+      <url>//localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>//localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.139.0</generator>
+    <language>en</language>
+    <copyright>Kavin</copyright>
+    <lastBuildDate>Thu, 28 Nov 2024 11:30:03 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test Post</title>
+      <link>//localhost:1313/pages/hi/</link>
+      <pubDate>Thu, 28 Nov 2024 11:30:03 +0000</pubDate>
+      <guid>//localhost:1313/pages/hi/</guid>
+      <description>Desc Text.</description>
+    </item>
+  </channel>
+</rss>
