@@ -1,8 +1,8 @@
 ---
-title: Blog Using Obsidian
-date: 2024-11-28T01:00:00+05:30
+title: "Blog Using Obsidian"
+date: "2024-11-28T01:00:00+05:30"
 weight: 1
-description: 
+description: "A blog post about using Obsidian for note-taking and blogging."
 tags:
   - new
   - tutorial
@@ -11,9 +11,9 @@ author:
 showToc: false
 draft: false
 disableHLJS: true
-cover: 
-	image: https://miro.medium.com/v2/resize:fit:1400/1*TnvYbAy2WLdZ8uzdzcZFtQ.jpeg
-	alt: new
+cover:
+image: "https://miro.medium.com/v2/resize:fit:1400/1*TnvYbAy2WLdZ8uzdzcZFtQ.jpeg"
+alt: "new"
 relative: true
 TocOpen: true
 hidemeta: false
