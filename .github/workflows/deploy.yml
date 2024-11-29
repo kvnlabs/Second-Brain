@@ -7,15 +7,15 @@ on:
       - "LICENSE"
       - "README.md"
     branches:
-      - master  # Trigger deploy on 'master' branch
-      - gh-pages  # Trigger deploy on 'gh-pages' branch
+      - master
+      - gh-pages
   workflow_dispatch:
     # Manual trigger with optional Hugo version input
     inputs:
       hugoVersion:
         description: "Hugo Version"
         required: false
-        default: "0.125.7"  # Default Hugo version is set to 0.125.7
+        default: "0.125.7"
 
 # Allow one concurrent deployment
 concurrency:
@@ -49,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: master  # Ensure the workflow checks out the 'master' branch
+          ref: master
 
       - name: Setup Pages
         id: pages
@@ -68,10 +68,10 @@ jobs:
             --baseURL ${{ steps.pages.outputs.base_url }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4  # Updated to v4
+        uses: actions/upload-artifact@v4
         with:
-          name: hugo-site-public
-          path: ./public  # The directory Hugo generates the site in
+          name: hugo-site-public  # Ensure this matches the name used in the deploy step
+          path: ./public  # Hugo output directory
 
   # Deployment job
   deploy:
@@ -83,4 +83,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3  # Keep v3 for deploy-pages as v4 is not yet released for this action
+        uses: actions/deploy-pages@v3
+        with:
+          artifact_name: hugo-site-public  # Ensure the artifact name matches the one used in the upload step
