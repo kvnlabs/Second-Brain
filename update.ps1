@@ -1,96 +1,121 @@
-# Set variables for the source and destination paths
-$obsidianPath = "D:\Obsidian\Vault\Pages"  # Path to your Obsidian posts
-$hugoContentPath = "D:\Dev\Second-Brain\content\posts"  # Path to Hugo content posts
-$attachmentsPath = "D:\Obsidian\Vault\Attachments"  # Path to attachments
-$staticImagesPath = "D:\Dev\Second-Brain\static\images"  # Path to Hugo static images
-$myrepo = "https://github.com/kvnlabs/Second-Brain.git"  
-$pythonScriptPath =""
+# Git Repository Sync Script with Advanced Error Handling
 
-# Set error handling
+# Configuration
+$repoPath = "D:\Dev\Second-Brain"
+$obsidianPath = "D:\Obsidian\Vault\Pages"
+$hugoContentPath = "D:\Dev\Second-Brain\content\posts"
+$pythonScriptPath = "D:\Dev\Second-Brain\images.py"
+$gitRemoteUrl = "https://github.com/kvnlabs/Second-Brain.git"
+
+# Error Handling and Logging
 $ErrorActionPreference = "Stop"
-Set-StrictMode -Version Latest
+$logFile = "$repoPath\sync_log.txt"
 
-# Change to the script's directory
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
-Set-Location $ScriptDir
+function Write-Log {
+    param([string]$Message, [string]$Level = "INFO")
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logEntry = "[$Level] $timestamp - $Message"
+    Add-Content -Path $logFile -Value $logEntry
+    Write-Host $logEntry
+}
 
-# Check for required commands
-$requiredCommands = @('git', 'python')
+# Ensure Git is installed
+try {
+    $gitVersion = git --version
+    Write-Log "Git version: $gitVersion"
+} catch {
+    Write-Log "Git is not installed" -Level "ERROR"
+    exit 1
+}
 
-foreach ($cmd in $requiredCommands) {
-    if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) {
-        Write-Error "$cmd is not installed or not in PATH."
+# Change to repository directory
+Set-Location $repoPath
+
+# Ensure we're in the correct branch
+try {
+    # Check current branch
+    $currentBranch = git rev-parse --abbrev-ref HEAD
+    Write-Log "Current branch: $currentBranch"
+
+    # If not on main or master, create or switch
+    if ($currentBranch -ne "main" -and $currentBranch -ne "master") {
+        Write-Log "Switching to main branch"
+        git checkout -b main
+    }
+} catch {
+    Write-Log "Error checking/creating branch" -Level "ERROR"
+    exit 1
+}
+
+# Python script for processing
+try {
+    Write-Log "Running Python image processing script"
+    python $pythonScriptPath
+} catch {
+    Write-Log "Python script failed" -Level "ERROR"
+    exit 1
+}
+
+# Configure Git user
+git config user.name "kavinthangavel"
+git config user.email "kxvinthxngxvel@gmail.com"
+
+# Add remote if not exists
+try {
+    $remotes = git remote
+    if (-not ($remotes -contains 'origin')) {
+        Write-Log "Adding remote origin"
+        git remote add origin $gitRemoteUrl
+    }
+} catch {
+    Write-Log "Error configuring remote" -Level "ERROR"
+    exit 1
+}
+
+# Fetch and pull latest changes
+try {
+    Write-Log "Fetching latest changes"
+    git fetch origin
+    
+    # Ensure we have a tracking branch
+    git branch --set-upstream-to=origin/main main
+    
+    # Pull latest changes, rebase if needed
+    git pull --rebase origin main
+} catch {
+    Write-Log "Fetch/Pull error" -Level "WARNING"
+}
+
+# Stage and commit changes
+try {
+    git add .
+    $commitMessage = "Sync: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    
+    # Check if there are changes to commit
+    $status = git status --porcelain
+    if ($status) {
+        Write-Log "Committing changes"
+        git commit -m "$commitMessage"
+    } else {
+        Write-Log "No changes to commit"
+    }
+} catch {
+    Write-Log "Commit failed" -Level "ERROR"
+    exit 1
+}
+
+# Push changes with force option
+try {
+    Write-Log "Pushing changes"
+    git push -u origin main
+} catch {
+    Write-Log "Push failed, attempting force push" -Level "WARNING"
+    try {
+        git push -f origin main
+    } catch {
+        Write-Log "Force push failed" -Level "ERROR"
         exit 1
     }
 }
 
-# Step 1: Copy Markdown files from Obsidian to Hugo content folder
-Write-Host "Copying Markdown files from Obsidian to Hugo content folder..."
-if (-not (Test-Path $obsidianPath)) {
-    Write-Error "Source path does not exist: $obsidianPath"
-    exit 1
-}
-
-Copy-Item -Path "$obsidianPath\*.md" -Destination $hugoContentPath -Recurse -Force
-
-# Step 2: Copy images from Obsidian to Hugo static images directory
-Write-Host "Copying images from Obsidian to Hugo static images directory..."
-if (-not (Test-Path $attachmentsPath)) {
-    Write-Error "Source images path does not exist: $attachmentsPath"
-    exit 1
-}
-
-# Ensure the static images directory exists
-if (-not (Test-Path $staticImagesPath)) {
-    New-Item -ItemType Directory -Path $staticImagesPath
-}
-
-Copy-Item -Path "$attachmentsPath\*" -Destination $staticImagesPath -Recurse -Force
-
-# Step 3: Run the images.py script to process Markdown files
-Write-Host "Processing Markdown files with images.py..."
-try {
-    & python $pythonScriptPath
-} catch {
-    Write-Error "Failed to run images.py."
-    exit 1
-}
-
-# Step 4: Check if Git is initialized, and initialize if necessary
-if (-not (Test-Path ".git")) {
-    Write-Host "Initializing Git repository..."
-    git init
-    git remote add origin $myrepo
-} else {
-    Write-Host "Git repository already initialized."
-    $remotes = git remote
-    if (-not ($remotes -contains 'origin')) {
-        Write-Host "Adding remote origin..."
-        git remote add origin $myrepo
-    }
-}
-
-# Step 5: Stage all changes for Git
-Write-Host "Staging changes for Git..."
-git add .
-
-# Step 6: Commit changes with a dynamic message
-$commitMessage = "Sync Obsidian posts and images on $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-$hasChanges = (git status --porcelain) -ne ""
-if (-not $hasChanges) {
-    Write-Host "No changes to commit."
-} else {
-    Write-Host "Committing changes..."
-    git commit -m "$commitMessage"
-}
-
-# Step 7: Push all changes to the main branch
-Write-Host "Pushing changes to GitHub..."
-try {
-    git push origin master
-} catch {
-    Write-Error "Failed to push to the master branch."
-    exit 1
-}
-
-Write-Host "All done! Markdown files and images copied, processed, committed, and pushed to GitHub."
+Write-Log "Sync completed successfully"
