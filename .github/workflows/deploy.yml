@@ -14,51 +14,60 @@ on:
       hugoVersion:
         description: "Hugo Version"
         required: false
-        default: "0.125.7"
+        default: "0.126.0"  # Updated to latest version
+
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
 # Default to bash shell for running commands
 defaults:
   run:
     shell: bash
+
 # Set permissions of GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.125.7' }}
+      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.126.0' }}
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Updated to v4
         with:
-          ref: master  # Ensure the workflow checks out the 'master' branch
+          submodules: recursive  # Simplified submodule checkout
+          fetch-depth: 0  # Fetch all history for theme updates
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3  # More robust Hugo setup
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true  # Use extended version for more features
+
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v3
-      - name: Get Theme
-        run: git submodule update --init --recursive
-      - name: Update theme to Latest commit
-        run: git submodule update --remote --merge
+        uses: actions/configure-pages@v4  # Updated to v4
+
       - name: Build with Hugo
         run: |
           hugo \
-            --buildDrafts --gc \
-            --baseURL ${{ steps.pages.outputs.base_url }}
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}"
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3.0.1 # Updated to v3.0.1
         with:
           path: ./public  # The directory Hugo generates the site in
+          retention-days: 1  # Optional: specify artifact retention
+
   # Deployment job
   deploy:
     environment:
@@ -69,4 +78,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4  # Updated to v4
