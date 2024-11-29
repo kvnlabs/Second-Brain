@@ -1,6 +1,6 @@
 ---
 title: Day 2 of Site Development
-date: 2024-11-30T01:00:05+30:00
+date: 2024-11-30T01:00:00+05:30
 weight: 
 tags:
   - new
