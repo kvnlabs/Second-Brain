@@ -92,11 +92,6 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages  # Match the artifact name from the upload step
-          
-        # Optional: Retry logic if the deployment fails
-        retry:
-          attempts: 3
-          delay: 30s  # 30 seconds between each retry
 
   # Optional manual trigger and logs for better troubleshooting
   debug:
