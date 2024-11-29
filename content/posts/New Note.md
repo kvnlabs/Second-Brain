@@ -14,6 +14,7 @@ cover:
 image: 
 alt: new
 relative: true
+hidden: false
 TocOpen: true
 hidemeta: true
 disableShare: true

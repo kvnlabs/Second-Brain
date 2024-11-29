@@ -15,8 +15,9 @@ cover:
 image: https://miro.medium.com/v2/resize:fit:1400/1*TnvYbAy2WLdZ8uzdzcZFtQ.jpeg
 alt: new
 relative: true
+hidden: false
 TocOpen: true
-hidemeta: true
+hidemeta: false
 disableShare: true
 hideSummary: false
 searchHidden: false
