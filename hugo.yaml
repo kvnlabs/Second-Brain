@@ -30,20 +30,15 @@ params:
   disableThemeToggle: false
   hideFooter: true
   ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
+  ShareButtons: ["linkedin", "twitter"]
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
+  UseHugoToc: false
   disableSpecial1stPost: false
   disableScrollToTop: false
   comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
 
   profileMode:
     enabled: true # Needs to be explicitly set
@@ -69,16 +64,16 @@ params:
       url: "https://x.com/kxvinthxngxvel"
 
   editPost:
-    URL: "https://github.com/kvnlabs/Second-Brain/content"
+    URL: "https://github.com/kvnlabs/Second-Brain/tree/main/content"
     Text: "Suggest Changes" # Edit text
     appendFilePath: true # Append file path to Edit link
 
   assets:
-    favicon: "/images/favicon.ico"
-    favicon16x16: "/images/favicon-16x16.png"
-    favicon32x32: "/images/favicon-32x32.png"
-    apple_touch_icon: "/images/apple-touch-icon.png"
-    safari_pinned_tab: "/images/safari-pinned-tab.svg"
+    favicon: "images/favicon/favicon.ico"
+    favicon16x16: "images/favicon/favicon-16x16.png"
+    favicon32x32: "images/favicon/favicon-32x32.png"
+    apple_touch_icon: "images/favicon/apple-touch-icon.png"
+    safari_pinned_tab: "images/favicon/safari-pinned-tab.svg"
 
   cover:
     linkFullImages: true
