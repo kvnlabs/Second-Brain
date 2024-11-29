@@ -1,4 +1,4 @@
-name: Publish to GitHub Pages
+name: Deploy Hugo PaperMod Demo to Pages
 
 on:
   push:
@@ -7,29 +7,34 @@ on:
       - "LICENSE"
       - "README.md"
     branches:
-      - master
-      - gh-pages
+      - master  # Trigger deploy on 'master' branch
+      - gh-pages  # Trigger deploy on 'gh-pages' branch
   workflow_dispatch:
+    # Allow manual trigger of the workflow with optional Hugo version input
     inputs:
       hugoVersion:
         description: "Hugo Version"
         required: false
         default: "0.125.7"
 
+# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# Default to bash shell for running commands
 defaults:
   run:
     shell: bash
 
+# Set permissions of GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
     env:
@@ -43,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: master  # Ensure the workflow checks out the 'master' branch
 
       - name: Setup Pages
         id: pages
@@ -57,19 +62,16 @@ jobs:
 
       - name: Build with Hugo
         run: |
-          hugo --buildDrafts --gc --baseURL ${{ steps.pages.outputs.base_url }}
-
-      - name: List files in public directory (Debug)
-        run: |
-          echo "Files in ./public directory:"
-          ls -l ./public  # Check if the public directory has files
+          hugo \
+            --buildDrafts --gc \
+            --baseURL ${{ steps.pages.outputs.base_url }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: hugo-site-public
-          path: ./public
+          path: ./public  # The directory Hugo generates the site in
 
+  # Deployment job
   deploy:
     environment:
       name: github-pages
@@ -79,6 +81,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
-        with:
-          artifact_name: hugo-site-public
+        uses: actions/deploy-pages@v2
