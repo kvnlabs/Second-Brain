@@ -1,6 +1,5 @@
 baseURL: "https://blog.kavinthangavel.tech/"
 title: SecondBrain
-copyright: "© [Kavin](https://kavinthangavel.tech)"
 paginate: 5
 theme: PaperMod
 
@@ -69,11 +68,9 @@ params:
     appendFilePath: true # Append file path to Edit link
 
   assets:
-    favicon: "images/favicon/favicon.ico"
-    favicon16x16: "images/favicon/favicon-16x16.png"
-    favicon32x32: "images/favicon/favicon-32x32.png"
-    apple_touch_icon: "images/favicon/apple-touch-icon.png"
-    safari_pinned_tab: "images/favicon/safari-pinned-tab.svg"
+    favicon: "https://raw.githubusercontent.com/kvnlabs/Second-Brain/734f85ce117d41aac67528f792295d36327b0d92/images/favicon/favicon.svg"
+    apple_touch_icon: "https://raw.githubusercontent.com/kvnlabs/Second-Brain/734f85ce117d41aac67528f792295d36327b0d92/images/favicon/apple-touch-icon.png"
+
 
   cover:
     linkFullImages: true
