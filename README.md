@@ -1,3 +1,5 @@
+[![Deploy to GitHub Pages](https://github.com/kvnlabs/secondbrain/actions/workflows/deploy.yml/badge.svg)](https://github.com/kvnlabs/secondbrain/actions/workflows/deploy.yml)
+
 Welcome to Second Brain! 🎉
 
 You've discovered a hidden project linked to my GitHub—congratulations and welcome aboard!
