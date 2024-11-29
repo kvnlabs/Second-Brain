@@ -79,12 +79,22 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: github-pages
+          name: github-pages  # Make sure this matches the upload artifact name
+
+      - name: Debug - List files in current directory
+        run: |
+          echo "Listing files in current directory:"
+          ls -alh  # List all files to confirm artifact location
+
+      - name: Check if artifact exists
+        run: |
+          if [ ! -f public.tar.gz ]; then
+            echo "Error: public.tar.gz not found!"
+            exit 1
+          fi
 
       - name: Extract artifact
         run: |
-          # Make sure to list the directory and check the artifact files
-          ls -alh
           tar -xzf public.tar.gz  # Extract the compressed tar.gz artifact
 
       - name: Deploy to GitHub Pages
@@ -92,13 +102,3 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages  # Match the artifact name from the upload step
-
-  # Optional manual trigger and logs for better troubleshooting
-  debug:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-      - name: Debug information
-        run: |
-          echo "Deployment logs:"
-          cat $GITHUB_WORKSPACE/logs/*  # Display any logs for debugging
