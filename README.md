@@ -1,4 +1,4 @@
-[![Deploy to GitHub Pages](https://github.com/kvnlabs/Second-Brain/actions/workflows/deploy.yml/badge.svg)](https://github.com/kvnlabs/Second-Brain/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/kvnlabs/Second-Brain/actions/workflows/deploy.yml/badge.svg)](https://github.com/kvnlabs/Second-Brain/actions/workflows/cl.yml)
 
 Welcome to Second Brain! 🎉
 
