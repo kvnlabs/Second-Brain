@@ -46,10 +46,10 @@ def process_markdown_files():
                 
                 # Dynamically create regex pattern for all supported file types
                 file_types_pattern = '|'.join(map(re.escape, SUPPORTED_FILE_TYPES))
-                images = re.findall(rf'\[\[([^]]*\.(?:{file_types_pattern[1:]}))\]\]', content)
+                attachments = re.findall(rf'\[\[([^]]*\.(?:{file_types_pattern}))\]\]', content)
                 
                 modified = False
-                for file_item in images:
+                for file_item in attachments:
                     # Determine file type and create appropriate markdown/link
                     file_ext = os.path.splitext(file_item)[1].lower()
                     
@@ -70,7 +70,7 @@ def process_markdown_files():
                     # Replace Obsidian link with new markdown/link
                     content = content.replace(f"[[{file_item}]]", markdown_item)
                     
-                    # Copy file only if not already processed
+                    # Copy file only if it exists in attachments and not already processed
                     file_source = os.path.join(attachments_dir, file_item)
                     if os.path.exists(file_source) and file_item not in processed_files:
                         try:
