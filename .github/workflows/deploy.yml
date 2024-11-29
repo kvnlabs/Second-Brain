@@ -1,7 +1,13 @@
 name: Deploy Hugo PaperMod Demo to Pages
 
+name: Deploy Hugo PaperMod Demo to Pages
+
 on:
   push:
+    paths-ignore:
+      - "images/**"
+      - "LICENSE"
+      - "README.md"
     paths-ignore:
       - "images/**"
       - "LICENSE"
@@ -36,7 +42,11 @@ permissions:
 jobs:
   # Build job
   build:
+  # Build job
+  build:
     runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.112.4' }}
     env:
       HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.112.4' }}
     steps:
@@ -80,5 +90,7 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
         id: deployment
         uses: actions/deploy-pages@v2
