@@ -15,19 +15,23 @@ on:
         description: "Hugo Version"
         required: false
         default: "0.125.7"
+
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
 # Default to bash shell for running commands
 defaults:
   run:
     shell: bash
+
 # Set permissions of GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   # Build job
   build:
@@ -52,16 +56,15 @@ jobs:
       
       - name: Build with Hugo
         run: |
-          hugo \
-            --buildDrafts --gc \
-            --baseURL ${{ steps.pages.outputs.base_url }}
+          hugo --buildDrafts --gc --baseURL ${{ steps.pages.outputs.base_url }}
+          tar -czf public.tar.gz ./public  # Compress the output directory into a tar.gz file
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          path: ./public  # The directory Hugo generates the site in
+          path: public.tar.gz  # Upload the compressed tar.gz file
           name: github-pages  # Explicitly name the artifact
-  
+
   # Deployment job
   deploy:
     environment:
@@ -70,6 +73,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Extract artifact
+        run: |
+          tar -xzf public.tar.gz  # Extract the compressed tar.gz artifact
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
