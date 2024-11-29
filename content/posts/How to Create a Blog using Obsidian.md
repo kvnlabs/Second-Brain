@@ -1,12 +1,21 @@
 ---
-title: BlogPipeline
-date: 2024-11-28
-draft: false
+title: Create a Blog Using Obsidian
+date: 2024-11-30T11:30:03+00:00
 tags:
-  - new
-  - check
+  - first
+author: Me
+draft: false
+description: Nothing Much
+disableHLJS: true
+disableShare: true
+searchHidden: false
+cover: 
+image: 
+alt: <alt text>
+caption: <text>
+relative: true
+hidden: false
 ---
-
 
 I'm here trying to create my own blog using obsidian here and this is my 1st day in this Software.
 

@@ -74,21 +74,22 @@ params:
       url: "https://x.com/kavinthangavel"
 
   editPost:
-    URL: "https://github.com/kavinthangavel/secondbrain/content"
+    URL: "https://github.com/kvnlabs/Second-Brain/content"
     Text: "Suggest Changes" # Edit text
     appendFilePath: true # Append file path to Edit link
 
   assets:
-    favicon: "https://kavinthangavel.tech/images/favicon.ico"
-    favicon16x16: "https://kavinthangavel.tech/images/favicon-16x16.png"
-    favicon32x32: "https://kavinthangavel.tech/images/favicon-32x32.png"
-    apple_touch_icon: "https://kavinthangavel.tech/images/apple-touch-icon.png"
-    safari_pinned_tab: "https://kavinthangavel.tech/images/safari-pinned-tab.svg"
+    favicon: "/images/favicon.ico"
+    favicon16x16: "/images/favicon-16x16.png"
+    favicon32x32: "/images/favicon-32x32.png"
+    apple_touch_icon: "/images/apple-touch-icon.png"
+    safari_pinned_tab: "/images/safari-pinned-tab.svg"
 
   cover:
-    hidden: true # Hide everywhere but not in structured data
-    hiddenInList: true # Hide on list pages and home
-    hiddenInSingle: true # Hide on single page
+    linkFullImages: true
+    # hidden: true # Hide everywhere but not in structured data
+    # hiddenInList: true # Hide on list pages and home
+    # hiddenInSingle: true # Hide on single page
 
 markup:
   goldmark:
