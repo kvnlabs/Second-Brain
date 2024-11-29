@@ -1,4 +1,4 @@
-name: Deploy to gh Pages
+name: Deploy to Github Pages
 on:
   push:
     paths-ignore:
@@ -35,30 +35,33 @@ jobs:
     env:
       HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.125.7' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master  # Ensure the workflow checks out the 'master' branch
+          submodules: recursive  # Simplify theme initialization
+      
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+      
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: master  # Ensure the workflow checks out the 'master' branch
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: Get Theme
-        run: git submodule update --init --recursive
-      - name: Update theme to Latest commit
-        run: git submodule update --remote --merge
+      
       - name: Build with Hugo
         run: |
           hugo \
             --buildDrafts --gc \
             --baseURL ${{ steps.pages.outputs.base_url }}
+      
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           path: ./public  # The directory Hugo generates the site in
+          name: github-pages  # Explicitly name the artifact
+  
   # Deployment job
   deploy:
     environment:
@@ -69,4 +72,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages  # Match the artifact name from the upload step
