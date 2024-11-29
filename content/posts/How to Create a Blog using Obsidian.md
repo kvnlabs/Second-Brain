@@ -8,7 +8,7 @@ draft: false
 description: Nothing Much
 canonicalURL: "https://canonical.url/to/page"
 disableHLJS: false
-disableShare: true
+disableShare: false
 searchHidden: false
 ---
 

@@ -24,7 +24,7 @@ params:
   description: "Welcome to SecondBrain: A place for knowledge and creativity."
   keywords: [Blog, Portfolio, Knowledgebase, Inspiration]
   author: Kavin Thangavel
-  images: ["https://kavinthangavel.tech/images/og-image.png"]
+  images: ["/images/og-image.png"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # Options: dark, light
   disableThemeToggle: false
@@ -48,7 +48,7 @@ params:
   profileMode:
     enabled: true # Needs to be explicitly set
     title: SecondBrain
-    subtitle: "my personal knowledge repository"
+    subtitle: "my knowledge repository"
     imageWidth: 120
     imageHeight: 120
     imageTitle: Profile Image
@@ -57,21 +57,16 @@ params:
         url: /posts/
       - name: Tags
         url: /tags/
-
-  homeInfoParams:
-    enabled: false # Needs to be explicitly set
-    Title: "Welcome to SecondBrain \U0001F44B"
-    Content: "Dive into a repository of curated knowledge and insights."
-
+    
   socialIcons:
     - name: github
       url: "https://github.com/kavinthangavel"
     - name: linkedin
-      url: "https://linkedin.com/in/kavinthangavel"
+      url: "https://linkedin.com/in/kavin-thangavel"
     - name: instagram
-      url: "https://instagram.com/kavin.tech"
+      url: "https://instagram.com/kxvinthxngxvel"
     - name: x
-      url: "https://x.com/kavinthangavel"
+      url: "https://x.com/kxvinthxngxvel"
 
   editPost:
     URL: "https://github.com/kvnlabs/Second-Brain/content"
