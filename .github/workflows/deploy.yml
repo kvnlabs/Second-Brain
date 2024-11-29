@@ -25,7 +25,7 @@ jobs:
 
       - name: Remove Jekyll dependencies (if any)
         run: |
-          rm -rf Gemfile Gemfile.lock .jekyll-cache
+          rm -rf Gemfile Gemfile.lock .jekyll-cache _config.yml _site
 
       - name: Setup Hugo
         run: |
