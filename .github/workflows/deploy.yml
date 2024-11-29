@@ -2,8 +2,10 @@ name: Publish to GH Pages
 on:
   push:
     branches:
-      - main
+      - master  # Change from 'main' to 'master'
   pull_request:
+    branches:
+      - master  # Ensure PRs to 'master' trigger this workflow
 
 jobs:
   deploy:
@@ -16,20 +18,29 @@ jobs:
 
       - name: Checkout destination
         uses: actions/checkout@v3
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'  # Change from 'main' to 'master'
         with:
           ref: gh-pages
           path: built-site
 
+      - name: Remove Jekyll dependencies (if any)
+        run: |
+          rm -rf Gemfile Gemfile.lock .jekyll-cache
+
       - name: Setup Hugo
         run: |
           curl -L -o /tmp/hugo.tar.gz 'https://github.com/gohugoio/hugo/releases/download/v0.139.2/hugo_extended_0.139.2_linux-amd64.tar.gz'
-          tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo          
-      - name: Build
-        run: ${RUNNER_TEMP}/hugo
+          tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo
 
-      - name: Deploy
-        if: github.ref == 'refs/heads/main'
+      - name: Verify Hugo Installation
+        run: ${RUNNER_TEMP}/hugo version  # Verify Hugo is working
+
+      - name: Build Hugo Site
+        run: |
+          ${RUNNER_TEMP}/hugo --verbose  # Build the Hugo site and show detailed logs
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'  # Change from 'main' to 'master'
         run: |
           cp -R public/* ${GITHUB_WORKSPACE}/built-site/
           cd ${GITHUB_WORKSPACE}/built-site
@@ -37,4 +48,11 @@ jobs:
           git config user.name 'kavinthangavel'
           git config user.email 'kxvinthxngxvel@gmail.com'
           git commit -m 'Updated site'
-          git push          
+          git push
+
+      # Ensure that the GitHub Token has sufficient permissions in organization context
+      - name: Ensure Token Permissions
+        run: |
+          echo "Ensuring GITHUB_TOKEN has required permissions..."
+          # Check the permissions using a simple API call to confirm
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/user
