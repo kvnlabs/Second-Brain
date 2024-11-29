@@ -74,7 +74,7 @@ params:
 
   cover:
     linkFullImages: true
-    # hidden: true # Hide everywhere but not in structured data
+    hidden: false
     # hiddenInList: true # Hide on list pages and home
     # hiddenInSingle: true # Hide on single page
 

@@ -1,26 +1,21 @@
 ---
 title: Day 2 of Site Development
 date: 2024-11-30T01:00:00+05:30
-weight: 
 tags:
   - new
   - development
 author:
   - Me
-showToc: false
 draft: false
-disableHLJS: true
-cover: 
-image: 
-alt: new
+showToc: false
+TocOpen: false
+disableHLJS: false
 relative: true
-hidden: false
-TocOpen: true
-hidemeta: true
+hidemeta: false
 disableShare: true
 hideSummary: false
 searchHidden: false
-ShowPostNavLinks: true
+ShowPostNavLinks: false
 ---
 
 Acutally im trying to make this site live and eveything im trying in trial and error method 
