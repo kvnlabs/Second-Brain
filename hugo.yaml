@@ -54,7 +54,7 @@ params:
     imageTitle: Profile Image
     buttons:
       - name: Posts
-        url: /pages/
+        url: /posts/
       - name: Tags
         url: /tags/
 
