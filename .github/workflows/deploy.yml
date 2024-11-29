@@ -1,4 +1,4 @@
-name: Deploy Hugo PaperMod Demo to Pages
+name: Publish to GitHub Pages
 
 on:
   push:
@@ -10,12 +10,12 @@ on:
       - master  # Trigger deploy on 'master' branch
       - gh-pages  # Trigger deploy on 'gh-pages' branch
   workflow_dispatch:
-    # Allow manual trigger of the workflow with optional Hugo version input
+    # Manual trigger with optional Hugo version input
     inputs:
       hugoVersion:
         description: "Hugo Version"
         required: false
-        default: "0.125.7"
+        default: "0.125.7"  # Default Hugo version is set to 0.125.7
 
 # Allow one concurrent deployment
 concurrency:
@@ -38,6 +38,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      # Set Hugo version to either the input version or default to 0.125.7
       HUGO_VERSION: ${{ github.event.inputs.hugoVersion || '0.125.7' }}
     steps:
       - name: Install Hugo CLI
@@ -67,8 +68,9 @@ jobs:
             --baseURL ${{ steps.pages.outputs.base_url }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
+          name: hugo-site-public
           path: ./public  # The directory Hugo generates the site in
 
   # Deployment job
@@ -81,4 +83,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3  # Keep v3 for deploy-pages as v4 is not yet released for this action
