@@ -17,4 +17,4 @@ This is a test para.
 
 
 # Images
-![Image Description](/media/Pasted%20image%2020241129220827.png)
+[Image Description](/media/Pasted%20image%2020241129220827.png)
