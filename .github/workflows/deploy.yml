@@ -6,10 +6,8 @@ on:
       - "LICENSE"
       - "README.md"
     branches:
-      - main  # Trigger deploy on 'master' branch
-      - gh-pages  # Trigger deploy on 'gh-pages' branch
+      - main  
   workflow_dispatch:
-    # Allow manual trigger of the workflow with optional Hugo version input
     inputs:
       hugoVersion:
         description: "Hugo Version"
