@@ -54,9 +54,9 @@ params:
     imageTitle: Profile Image
     buttons:
       - name: Posts
-        url: pages
+        url: /pages/
       - name: Tags
-        url: tags
+        url: /tags/
 
   homeInfoParams:
     enabled: false # Needs to be explicitly set
