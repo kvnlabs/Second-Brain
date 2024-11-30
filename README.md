@@ -10,8 +10,6 @@ I'm also embarking on an exciting journey to train an AI modeled after how I thi
 
 Stay tuned as I build my Second Brain!
 
-Update :
-
+# Update :
 This repo will not be continued and ill not deploy this site..
-
 Instead im planning to Delopy it in a New Site and Ill link that Repo Here: 
