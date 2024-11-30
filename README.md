@@ -12,4 +12,5 @@ Stay tuned as I build my Second Brain!
 
 # Update :
 This repo will not be continued and ill not deploy this site..
-Instead im planning to Delopy it in a New Site and Ill link that Repo Here: 
+Successfully wasted a whole 2days just to learn on how to deploy a sub-domain, how to link github pages to our domain, etc..
+I'm planning to Delopy it in a New Repo and Ill link that Repo Here: 
